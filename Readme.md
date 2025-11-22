@@ -1,6 +1,8 @@
 <div align="center">
 
   <br />
+
+  <img src="images/banner.jpg">
   <h1 align="center">ShopFlow - Print Automation For Businesses</h1>
 
   <p align="center">
