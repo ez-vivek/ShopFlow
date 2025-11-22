@@ -1,10 +1,7 @@
 <div align="center">
 
   <br />
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDN5MGhtZXpmNWVremV0eWs1cnlmOGhxZGZvaGxwYXl3dzZiZW1mbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/lXiRLb0xFzmreM8k8/giphy.gif" alt="Printer Animation" width="200">
-  
-  <h1 align="center">🖨️ ShopFlow</h1>
-  <h2 align="center">Smart Print Automation for Businesses</h2>
+  <h1 align="center">ShopFlow - Print Automation For Businesses</h1>
 
   <p align="center">
     <br>
@@ -229,9 +226,6 @@ For issues, questions, or suggestions, please [open an issue](https://github.com
 
 <div align="center">
   <p>
-    Made with ❤️ for Businesses Automation
-  </p>
-  <p>
-    <a href="#shopflow">Back to Top</a>
+    Made with ❤️ for Businesses
   </p>
 </div>
