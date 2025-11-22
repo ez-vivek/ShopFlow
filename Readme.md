@@ -3,25 +3,21 @@
   <br />
   <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDN5MGhtZXpmNWVremV0eWs1cnlmOGhxZGZvaGxwYXl3dzZiZW1mbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/lXiRLb0xFzmreM8k8/giphy.gif" alt="Printer Animation" width="200">
   
-  <h1 align="center">ShopFlow: Telegram Print Automation</h1>
+  <h1 align="center">🖨️ ShopFlow</h1>
+  <h2 align="center">Smart Print Automation for Businesses</h2>
 
   <p align="center">
-    <strong>Turn your Print Shop into a Smart Office.</strong><br>
+    <br>
     Monitor folders, trigger prints via Telegram, and control settings (Copies, Duplex, Color) remotely.
     <br />
     <br />
-    <a href="#-demo">View Demo</a>
-    ·
-    <a href="#-installation">Installation</a>
-    ·
-    <a href="#-configuration">Configuration</a>
   </p>
 
   <p align="center">
     <img src="https://img.shields.io/badge/Python-3.10+-blue.svg?style=for-the-badge&logo=python&logoColor=white" alt="Python">
     <img src="https://img.shields.io/badge/Telegram-Bot_API-2CA5E0.svg?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram">
     <img src="https://img.shields.io/badge/Platform-Windows-0078D6.svg?style=for-the-badge&logo=windows&logoColor=white" alt="Windows">
-    <img src="https://img.shields.io/badge/Engine-SumatraPDF-FFD700.svg?style=for-the-badge" alt="SumatraPDF">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License">
   </p>
 </div>
 
@@ -40,106 +36,202 @@
 
 ---
 
-## 📱 Features
+## ✨ Features
 
 | Feature | Description |
 | :--- | :--- |
-| **📂 Folder Watchdog** | Instantly detects `.pdf`, `.docx`, `.jpg` dropped into the target folder. |
+| **📂 Folder Watchdog** | Instantly detects `.pdf`, `.docx`, `.jpg`, `.png` files dropped into the target folder. |
 | **🎮 Remote Control** | Interactive Telegram buttons to control the printer from anywhere in the shop. |
-| **⚙️ Advanced Settings** | Toggle **2-Sided (Duplex)**, **Black & White**, or **Page Copies** via Telegram. |
-| **🧠 Smart Queue** | Handles multiple files without crashing; safety "Yes/No" check before printing. |
+| **⚙️ Advanced Settings** | Toggle **2-Sided (Duplex)**, **Black & White**, or adjust **Page Copies** via Telegram. |
+| **🧠 Smart Queue** | Handles multiple files without crashing; safety "Yes/No" confirmation before printing. |
 | **⚡ Silent Engine** | Uses **SumatraPDF** for high-speed, driver-less printing in the background. |
+| **📡 Real-time Notifications** | Get instant Telegram alerts when new files are ready for printing. |
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Language:** [Python](https://www.python.org/)
-* **Libraries:**
-    * `watchdog` (File System Monitoring)
-    * `pyTelegramBotAPI` (Telegram Integration)
-* **External Engine:** [SumatraPDF Portable](https://www.sumatrapdfreader.org/download-free-pdf-viewer) (CLI Printing)
+| Component | Details |
+| :--- | :--- |
+| **Language** | [Python 3.10+](https://www.python.org/) |
+| **File Monitoring** | [watchdog](https://github.com/gorakhargosh/watchdog) |
+| **Telegram Integration** | [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) |
+| **Environment Config** | [python-dotenv](https://github.com/theskumar/python-dotenv) |
+| **Print Engine** | [SumatraPDF Portable](https://www.sumatrapdfreader.org/download-free-pdf-viewer) |
+| **OS Support** | Windows 10/11 |
 
 ---
 
 ## 📦 Installation
 
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/yourusername/shopflow-automation.git](https://github.com/yourusername/shopflow-automation.git)
-cd shopflow-automation
-````
+### Prerequisites
+- Windows 10 or Windows 11
+- Python 3.10 or higher
+- Telegram Bot (create one via [@BotFather](https://t.me/botfather))
+- Your Telegram Chat ID
 
-### 2\. Set up Virtual Environment
+### Step 1: Clone the Repository
+```powershell
+git clone https://github.com/ez-vivek/ShopFlow.git
+cd ShopFlow
+```
 
-It is recommended to use a virtual environment to keep dependencies clean.
-
-```bash
+### Step 2: Set up Virtual Environment
+Create a virtual environment to keep dependencies organized:
+```powershell
 python -m venv venv
-.\venv\Scripts\activate
+.\venv\Scripts\Activate.ps1
 ```
 
-### 3\. Install Dependencies
-
-```bash
-pip install watchdog pyTelegramBotAPI
+### Step 3: Install Python Dependencies
+```powershell
+pip install watchdog pyTelegramBotAPI python-dotenv pywin32
 ```
 
-### 4\. Install SumatraPDF Engine
+### Step 4: Configure Environment Variables
+Create a `.env` file in the project root:
+```env
+BOT_TOKEN=your_telegram_bot_token_here
+YOUR_CHAT_ID=your_telegram_chat_id_here
+```
 
-1.  Download **SumatraPDF Portable** (zip version).
-2.  Extract `SumatraPDF.exe`.
-3.  Place the `.exe` file inside your project root folder (same place as `autoprint.py`).
+### Step 5: Create Incoming Files Folder
+Ensure the `Incoming Files` folder exists in the project directory:
+```powershell
+New-Item -ItemType Directory -Force -Path "Incoming Files"
+```
 
 -----
 
 ## 🔧 Configuration
 
-Open `autoprint.py` and edit the **Configuration Section** at the top:
+### Environment Variables (.env)
+The application reads configuration from a `.env` file in the project root:
 
-```python
-# ==================== CONFIGURATION ====================
-BOT_TOKEN = "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"  # Get from @BotFather
-YOUR_CHAT_ID = 123456789                                  # Get from @userinfobot
-WATCH_FOLDER = r"C:\Users\ShopAdmin\Desktop\Incoming_Files"
-SUMATRA_PATH = r"C:\Users\ShopAdmin\Desktop\SumatraPDF.exe"
-# =======================================================
+```env
+BOT_TOKEN=your_telegram_bot_token_here
+YOUR_CHAT_ID=your_telegram_chat_id_here
 ```
 
-> **Note:** Ensure `WATCH_FOLDER` exists. The script will error out if the folder is missing.
+### How to Get Your Credentials
+
+1. **BOT_TOKEN:**
+   - Chat with [@BotFather](https://t.me/botfather) on Telegram
+   - Use command `/newbot`
+   - Follow the instructions and copy the token
+
+2. **YOUR_CHAT_ID:**
+   - Chat with [@userinfobot](https://t.me/userinfobot) on Telegram
+   - The bot will show your Chat ID
+
+### Supported File Types
+The following file formats are automatically detected and can be printed:
+- `.pdf` - PDF Documents
+- `.docx` - Microsoft Word Documents
+- `.jpg`, `.jpeg` - JPEG Images
+- `.png` - PNG Images
+
+> **⚠️ Important:** Ensure the `Incoming Files` folder exists before running the application. The script will monitor this folder for new files.
 
 -----
 
-## 🕹️ Usage Workflow
+## 🎯 Usage Workflow
 
-1.  **Start the Bot:**
+### Starting the Application
+1. Activate your virtual environment (if not already active):
+   ```powershell
+   .\venv\Scripts\Activate.ps1
+   ```
 
-    ```bash
-    python autoprint.py
-    ```
+2. Run the bot:
+   ```powershell
+   python autoprint.py
+   ```
+   You should see a confirmation message indicating the bot has started successfully.
 
-    *You will see: "--- ADVANCED PRINT BOT STARTED ---"*
+### Printing a File
+1. **Save a file** to the `Incoming Files` folder (e.g., `resume.pdf`)
+2. **Wait for notification** - Your phone will receive an instant Telegram message with print options
+3. **Configure settings** using the interactive buttons:
+   - `➕` - Increase number of copies
+   - `➖` - Decrease number of copies
+   - `🔄` - Toggle 2-Sided (Duplex) printing
+   - `🎨` - Toggle Color/Black & White
+   - `✅ PRINT NOW` - Confirm and print
+   - `❌ CANCEL` - Cancel the print job
+4. **Confirmation** - Once you tap `✅ PRINT NOW`, the document prints automatically to your default printer
 
-2.  **Trigger a Print:**
+### Tips
+- Keep the bot running in the background while working
+- You can manage multiple print jobs simultaneously
+- Each file gets its own Telegram control panel
+- The bot logs all activity to the console
 
-      * Save a customer's file (e.g., `resume.pdf`) into the `Incoming_Files` folder.
 
-3.  **Control via Telegram:**
+## ❓ Troubleshooting
 
-      * Your phone vibrates.
-      * **Tap** `➕` to increase copies.
-      * **Tap** `🔄` to switch to 2-sided.
-      * **Tap** `✅ PRINT NOW`.
+| Issue | Solution |
+| :--- | :--- |
+| **Bot not responding** | Check that `BOT_TOKEN` and `YOUR_CHAT_ID` are correctly set in `.env` file. Restart the application. |
+| **Files not detected** | Ensure the `Incoming Files` folder exists. Check file extensions are supported (`.pdf`, `.docx`, `.jpg`, `.png`). |
+| **`ModuleNotFoundError`** | Install all dependencies: `pip install -r requirements.txt` |
+| **Telegram errors** | Verify bot is still active in BotFather. Check internet connection. |
 
-4.  **Done\!** The printer starts automatically.
+## 📋 Requirements File
 
+For easier setup, all dependencies are listed in `requirements.txt`:
+```
+watchdog>=3.0.0
+pyTelegramBotAPI>=4.10.0
+python-dotenv>=1.0.0
+pywin32>=305
+```
+
+Install all at once:
+```powershell
+pip install -r requirements.txt
+```
+
+## 📄 Project Structure
+
+```
+ShopFlow/
+├── autoprint.py           # Main application file
+├── test.py               # Testing file
+├── .env                  # Environment variables (create this)
+├── requirements.txt      # Python dependencies
+├── Readme.md            # This file
+├── SumatraPDF.exe       # Printer engine (download separately)
+└── Incoming Files/      # Folder for files to print
+```
 
 ## 🤝 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+### How to Contribute
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+## 📞 Support
+
+For issues, questions, or suggestions, please [open an issue](https://github.com/ez-vivek/ShopFlow/issues) on GitHub.
+
+---
+
+<div align="center">
+  <p>
+    Made with ❤️ for Businesses Automation
+  </p>
+  <p>
+    <a href="#shopflow">Back to Top</a>
+  </p>
+</div>
