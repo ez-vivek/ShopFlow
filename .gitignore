@@ -1,0 +1,15 @@
+# Secrets
+.env
+
+# Python Virtual Environment (Never upload this!)
+venv/
+.venv/
+
+# PyInstaller Build Artifacts (Too big, not needed code)
+build/
+dist/
+*.spec
+
+# Python Cache
+__pycache__/
+*.pyc
